@@ -65,6 +65,7 @@
             linkDangKy.TabIndex = 14;
             linkDangKy.TabStop = true;
             linkDangKy.Text = "Bạn chưa có tài khoản?";
+            linkDangKy.LinkClicked += linkDangKy_LinkClicked;
             // 
             // btnDangNhap
             // 
@@ -88,6 +89,7 @@
             btnThoat.TabIndex = 12;
             btnThoat.Text = "Thoát";
             btnThoat.UseVisualStyleBackColor = true;
+            btnThoat.Click += btnThoat_Click;
             // 
             // tbMatKhau
             // 
@@ -139,14 +141,17 @@
             // 
             // frmLogin
             // 
+            AcceptButton = btnDangNhap;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnThoat;
             ClientSize = new Size(476, 245);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Đăng Nhập";
+            FormClosing += frmLogin_FormClosing;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

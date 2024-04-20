@@ -1,6 +1,7 @@
 ﻿using eShop.Chung;
 using eShop.Data;
 using eShop.DTOs;
+using eShop.ThongBao;
 using System.Data.SqlClient;
 
 namespace eShop.XuLyNghiepVu.HeThong;
@@ -11,7 +12,6 @@ namespace eShop.XuLyNghiepVu.HeThong;
 /// </summary>
 public class DangNhapBL
 {
-
     public KetQua XuLy(DangNhapDto thongTinDangNhap)
     {
         // Kiểm tra định dạng dữ liệu
@@ -43,22 +43,24 @@ public class DangNhapBL
 
         if (result.Rows.Count == 0)
         {
-            return KetQua.ThatBai("Tên đăng nhập hoặc mật khẩu chưa đúng!!");
+            return KetQua.ThatBai(DangNhapTB.SaiThongTinDangNhap);
         }
 
-        return KetQua.ThanhCong("Đăng nhập thành công!!");
+        return KetQua.ThanhCong(DangNhapTB.ThanhCong);
     }
 
     private KetQua KiemTraDinhDang(DangNhapDto dangNhap)
     {
-        if(string.IsNullOrEmpty(dangNhap.TenDangNhap) == true || string.IsNullOrWhiteSpace(dangNhap.TenDangNhap))
+        if(string.IsNullOrEmpty(dangNhap.TenDangNhap) == true 
+            || string.IsNullOrWhiteSpace(dangNhap.TenDangNhap))
         {
-            return KetQua.ThatBai("Tên đăng nhập chưa đúng định dạng!");
+            return KetQua.ThatBai(DangNhapTB.TenDangNhapSai);
         }
 
-        else if (string.IsNullOrEmpty(dangNhap.MatKhau) == true || string.IsNullOrWhiteSpace(dangNhap.MatKhau))
+        else if (string.IsNullOrEmpty(dangNhap.MatKhau) == true 
+            || string.IsNullOrWhiteSpace(dangNhap.MatKhau))
         {
-            return KetQua.ThatBai("Mật khẩu chưa đúng định dạng!");
+            return KetQua.ThatBai(DangNhapTB.MatKhauSai);
         }
 
         else
