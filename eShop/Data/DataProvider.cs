@@ -55,7 +55,7 @@ public class DataProvider
     /// ** Lưu ý: Phải truyền đúng tham số giống với tên đã đặt ở store nếu không sẽ lỗi
     /// VD: Bên store tạo 1 hàm truyền 2 biến @username và password thì bên code cũng truyền @username và password
     /// <returns>Trả về chuổi kết quả</returns>
-    public string? ExecuteScalarStoredProcedure(string procedureName, SqlParameter[]? parameters = null)
+    public object ExecuteScalarStoredProcedure(string procedureName, SqlParameter[]? parameters = null)
     {
         using SqlConnection connection = new(connectionString);
         using SqlCommand command = new(procedureName, connection);
@@ -76,6 +76,6 @@ public class DataProvider
         connection.Close();
 
         // Chuyển đổi kết quả thành chuỗi
-        return result != null ? result.ToString() : string.Empty;
+        return result;
     }
 }

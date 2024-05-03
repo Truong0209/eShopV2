@@ -273,7 +273,6 @@
             // 
             // lvGioHang
             // 
-            lvGioHang.CheckBoxes = true;
             lvGioHang.Columns.AddRange(new ColumnHeader[] { colTenSanPham, colSoLuong, colGia, colMaSP });
             lvGioHang.Dock = DockStyle.Fill;
             lvGioHang.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);

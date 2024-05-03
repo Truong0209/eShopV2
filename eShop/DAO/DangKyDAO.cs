@@ -59,7 +59,7 @@ public class DangKyDAO
             new(paramTenHienThi, thongTin.TenHienThi),
         ];
 
-        var ketQua = DataProvider.Instance.ExecuteScalarStoredProcedure(tenProc, parameters);
+        string ketQua = (string)DataProvider.Instance.ExecuteScalarStoredProcedure(tenProc, parameters);
 
         if (ketQua is null)
         {

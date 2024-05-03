@@ -14,10 +14,9 @@ namespace eShop.From
         public fDanhMuc(string tenDangNhap = null)
         {
             InitializeComponent();
-            HienThiDanhSachSanPham();
-            HienThiComboLoaiSanPham();
 
             _nguoiDungHienTai = DangNhapDAO.Instance.LayThongTinNguoiDung(tenDangNhap);
+            HienThiComboLoaiSanPham();
             PhanQuyen();
         }
 
@@ -27,7 +26,7 @@ namespace eShop.From
 
             pnSanPham.Controls.Clear();
 
-            var danhSachSanPham = DanhMucDAO.Instance.LayDsSanPham(timKiem);
+            var danhSachSanPham = SanPhamDAO.Instance.LayDsSanPham(timKiem);
 
             // Trường hợp filter theo combobox loại sản phẩm
             if (maLoaiSanPham != null)
@@ -52,7 +51,7 @@ namespace eShop.From
 
         public void HienThiComboLoaiSanPham()
         {
-            var danhSachLoaiSanPham = DanhMucDAO.Instance.LayDsLoaiSanPham();
+            var danhSachLoaiSanPham = LoaiSanPhamDAO.Instance.LayDsLoaiSanPham();
 
             // Tạo một tùy chọn chọn mặc định
             var defaultOption = new LoaiSanPhamModel { MaLoaiSanPham = 0, TenLoaiSanPham = "Chọn loại sản phẩm..." };
@@ -69,7 +68,7 @@ namespace eShop.From
         public void PhanQuyen()
         {
             // Chỉ hiện thị trang admin với loại tài khoản admin
-            if (_nguoiDungHienTai.MaLoaiTaiKhoan != (int)LoaiTaiKhoan.Admin)
+            if (_nguoiDungHienTai.MaLoaiTaiKhoan != (int)ELoaiTaiKhoan.Admin)
             {
                 menuAdmin.Visible = false;
             }
@@ -176,7 +175,6 @@ namespace eShop.From
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            HienThiDanhSachSanPham();
             HienThiComboLoaiSanPham();
             tbTimKiem.Clear();
         }
@@ -238,13 +236,17 @@ namespace eShop.From
         {
             int macDinh = 0;
             string? timKiem = string.IsNullOrEmpty(tbTimKiem.Text) ? null : tbTimKiem.Text.Trim().ToLower();
-            if (cbLoaiSanPham.SelectedValue is int selectedValue && selectedValue > macDinh)
+            if(cbLoaiSanPham.SelectedValue != null)
             {
-                HienThiDanhSachSanPham(maLoaiSanPham: selectedValue, timKiem);
-            }
-            else
-            {
-                HienThiDanhSachSanPham();
+                _ = int.TryParse(cbLoaiSanPham.SelectedValue.ToString(), out int selectedValue);
+                if(selectedValue == macDinh)
+                {
+                    HienThiDanhSachSanPham();
+                }
+                else
+                {
+                    HienThiDanhSachSanPham(maLoaiSanPham: selectedValue, timKiem);
+                }
             }
 
             // Clear sản phẩm đã chọn
@@ -254,7 +256,6 @@ namespace eShop.From
             numSoLuong.Value = 1;
 
         }
-        #endregion
 
         private void menuCapNhatTT_Click(object sender, EventArgs e)
         {
@@ -275,6 +276,19 @@ namespace eShop.From
         {
             var form = new fDonHang(maTaiKhoan: _nguoiDungHienTai.MaTaiKhoan);
             form.ShowDialog();
+        }
+
+        #endregion
+
+        private void menuAdmin_Click(object sender, EventArgs e)
+        {
+            var form = new fAdmin();
+            form.ShowDialog();
+        }
+
+        private void menuDanhMuc_Click(object sender, EventArgs e)
+        {
+            HienThiDanhSachSanPham();
         }
     }
 }

@@ -81,11 +81,11 @@ namespace eShop.GUI
                 SqlParameter[] parameters =
                 [
                     new(paramDiaChi, tbDiaChi.Text),
-                new(paramDsSanPham, dsSanPham),
-                new(paramMaTaiKhoan, _maNguoiDung),
-                new(paramSoDt, tbSdtNguoiNhan.Text),
-                new(paramTenNguoiNhan, tbTenNguoiNhan.Text),
-            ];
+                    new(paramDsSanPham, dsSanPham),
+                    new(paramMaTaiKhoan, _maNguoiDung),
+                    new(paramSoDt, tbSdtNguoiNhan.Text),
+                    new(paramTenNguoiNhan, tbTenNguoiNhan.Text),
+                ];
 
                 var data = DataProvider.Instance.ExecuteStoredProcedure(tenProc, parameters);
                 if (data is null)

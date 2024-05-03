@@ -30,9 +30,9 @@
         {
             menuStrip1 = new MenuStrip();
             menuDanhMuc = new ToolStripMenuItem();
+            menuDonHang = new ToolStripMenuItem();
             menuTaiKhoan = new ToolStripMenuItem();
             menuDangXuat = new ToolStripMenuItem();
-            menuDonHang = new ToolStripMenuItem();
             menuAdmin = new ToolStripMenuItem();
             panel2 = new Panel();
             btnXoaTatCa = new Button();
@@ -80,6 +80,14 @@
             menuDanhMuc.Name = "menuDanhMuc";
             menuDanhMuc.Size = new Size(74, 20);
             menuDanhMuc.Text = "Danh Mục";
+            menuDanhMuc.Click += menuDanhMuc_Click;
+            // 
+            // menuDonHang
+            // 
+            menuDonHang.Name = "menuDonHang";
+            menuDonHang.Size = new Size(116, 20);
+            menuDonHang.Text = "Đơn hàng của bạn";
+            menuDonHang.Click += menuDonHang_Click;
             // 
             // menuTaiKhoan
             // 
@@ -91,22 +99,16 @@
             // menuDangXuat
             // 
             menuDangXuat.Name = "menuDangXuat";
-            menuDangXuat.Size = new Size(180, 22);
+            menuDangXuat.Size = new Size(128, 22);
             menuDangXuat.Text = "Đăng xuất";
             menuDangXuat.Click += menuDangXuat_Click;
-            // 
-            // menuDonHang
-            // 
-            menuDonHang.Name = "menuDonHang";
-            menuDonHang.Size = new Size(116, 20);
-            menuDonHang.Text = "Đơn hàng của bạn";
-            menuDonHang.Click += menuDonHang_Click;
             // 
             // menuAdmin
             // 
             menuAdmin.Name = "menuAdmin";
             menuAdmin.Size = new Size(55, 20);
             menuAdmin.Text = "Admin";
+            menuAdmin.Click += menuAdmin_Click;
             // 
             // panel2
             // 
@@ -349,7 +351,6 @@
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             MainMenuStrip = menuStrip1;
-            MaximizeBox = false;
             Name = "fDanhMuc";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Chung";
