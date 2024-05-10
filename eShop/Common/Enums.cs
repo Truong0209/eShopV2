@@ -58,6 +58,20 @@ public class Enums
         colTenLoaiND = 2
     }
 
+    public enum ETableDonHang
+    {
+        colMaDH = 1,
+        colNgayDat = 2,
+        colNgayGiao = 3,
+        colNguoiDat = 4,
+        colTrangThai = 5,
+        colNguoiNhan = 6,
+        colSdtNhan = 7,
+        colDiaChiNhan = 8,
+        colMaTrangThai = 9,
+        colPTTT = 10
+    }
+
     public enum EKetQuaTruyVan
     {
         KhongTonTai = 404, // Không tồn tại
@@ -70,5 +84,13 @@ public class Enums
     {
         ThemMoi = 0,
         CapNhat = 1
+    }
+
+    public enum ETrangThaiDH
+    {
+        DaDatHang = 1,
+        DangGiaoHang = 2,
+        ThanhCong = 3,
+        Huy = 4
     }
 }

@@ -1,5 +1,4 @@
 ﻿using eShop.Chung;
-using eShop.Common.CustomUI;
 using eShop.DAO;
 using eShop.From;
 using eShop.Models;
@@ -358,6 +357,154 @@ namespace eShop.GUI
         }
         #endregion
 
+        #region Tab Đơn hàng
+
+        /// <summary>
+        /// Hàm hiển thị danh sách đơn hàng
+        /// </summary>
+        /// <param name="type">Loại (null: không lọc ngày, true: lọc theo ngày đặt, false: lọc theo ngày giao)</param>
+        /// <param name="timKiem">Từ khóa tìm kiếm</param>
+        public void HienThiDsDonHang(bool? type = null, string? timKiem = null)
+        {
+            List<DonHangModel> dsDonHang;
+            lvDonHang.Items.Clear();
+            // trường hợp không filter theo thời gian thì xử lý tìm kiếm theo từ nhập vào
+            if (type is null)
+            {
+                dsDonHang = DonHangDAO.Instance.LayDsDonHang(timKiem: timKiem);
+            }
+            else
+            {
+
+                dsDonHang = DonHangDAO.Instance.LayDsDonHang(
+                    loai: type.Value,
+                    ngayTu: dtNgayBatDau.Value.Date,
+                    ngayDen: dtNgayKetThuc.Value.Date,
+                    timKiem: timKiem
+                );
+            }
+
+            if (dsDonHang.Count > 0)
+            {
+                int soTT = 1;
+                foreach (var donHang in dsDonHang)
+                {
+                    ListViewItem lsvItem = new(soTT.ToString());
+                    lsvItem.SubItems.Add(donHang.MaDonHang.ToString());
+                    lsvItem.SubItems.Add(donHang.NgayDat.ToString("dd/MM/yyyy"));
+                    lsvItem.SubItems.Add(donHang.NgayGiao.ToString("dd/MM/yyyy"));
+                    lsvItem.SubItems.Add(donHang.TenNguoiDat);
+                    lsvItem.SubItems.Add(donHang.TrangThai);
+                    lsvItem.SubItems.Add(donHang.TenNguoiNhan);
+                    lsvItem.SubItems.Add(donHang.SoDT);
+                    lsvItem.SubItems.Add(donHang.DiaChi);
+                    lsvItem.SubItems.Add(donHang.MaTrangThai.ToString());
+                    lsvItem.SubItems.Add(donHang.PhuongThucTT);
+                    lvDonHang.Items.Add(lsvItem);
+                    soTT++;
+                }
+            }
+        }
+
+        public void LayDsCTDonHang(int maDonHang)
+        {
+            if (maDonHang <= 0)
+            {
+                return;
+            }
+            else
+            {
+                var dsChiTiet = DonHangDAO.Instance.LayCTDonHang(maDonHang);
+                lvCTDonHang.Items.Clear();
+                int soTT = 1;
+                decimal tongTien = 0;
+                foreach (var chiTiet in dsChiTiet)
+                {
+                    ListViewItem lsvItem = new(soTT.ToString());
+                    lsvItem.SubItems.Add(chiTiet.TenSanPham);
+                    lsvItem.SubItems.Add(chiTiet.SoLuong.ToString());
+                    lsvItem.SubItems.Add(string.Format("{0:N0}", chiTiet.ThanhTien));
+                    tongTien += chiTiet.ThanhTien;
+                    lvCTDonHang.Items.Add(lsvItem);
+                    soTT++;
+                }
+                lb_TongTien.Text = string.Format("{0:N0} VND", tongTien);
+            }
+        }
+
+        public void ThayDoiNgayLocTrongFormDonHang()
+        {
+            string? timKiem = string.IsNullOrEmpty(tbTraCuuNhanh.Text) == false
+                      ? tbTraCuuNhanh.Text.Trim().ToLower()
+                      : null;
+            if (rbNgayDat.Checked == rbNgayGiao.Checked)
+            {
+                HienThiDsDonHang(null, timKiem);
+                return;
+            }
+            else
+            {
+                if (dtNgayBatDau.Value.Date > dtNgayKetThuc.Value.Date)
+                {
+                    dtNgayBatDau.Focus();
+                    MessageBox.Show("Ngày kết thúc không được nhỏ nhơn ngày bắt đầu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    bool loai = rbNgayDat.Checked;
+                    HienThiDsDonHang(loai, timKiem);
+                }
+            }
+        }
+
+        public void HienThiCbTrangThaiDH()
+        {
+            // Tạo một tùy chọn chọn mặc định
+            var dsTrangThai = new List<TrangThaiDonHangModel>
+            {
+                new() {MaTrangThai = 1, TenTrangThai = "Đã Đặt Hàng"},
+                new() {MaTrangThai = 2, TenTrangThai = "Đang Giao Hàng"},
+                new() {MaTrangThai = 3, TenTrangThai = "Thành Công"},
+                new() {MaTrangThai = 4, TenTrangThai = "Đã Hủy"},
+            };
+
+            cb_TrangThai.DataSource = null;
+
+            cb_TrangThai.DataSource = dsTrangThai;
+
+            cb_TrangThai.DisplayMember = "TenTrangThai";
+            cb_TrangThai.ValueMember = "MaTrangThai";
+        }
+
+        public void LamMoiDonHang()
+        {
+            btn_ChuyenTrangThai.Enabled = false;
+            HienThiDsDonHang();
+            HienThiCbTrangThaiDH();
+            tbTraCuuNhanh.Focus();
+
+            tb_MaDH.Text = null;
+            tb_NgayDat.Text = null;
+            tb_NguoiDat.Text = null;
+            tb_NgayGiao.Text = null;
+            tb_NguoiNhan.Text = null;
+            tb_SdtNhan.Text = null;
+            tb_DiaChiNhan.Text = null;
+            tb_PTTT.Text = null;
+            lb_TongTien.Text = null;
+            tbTraCuuNhanh.Text = null;
+
+            rbNgayDat.Checked = false;
+            rbNgayGiao.Checked = false;
+            dtNgayBatDau.Value = DateTime.Now;
+            dtNgayKetThuc.Value = DateTime.Now;
+
+            lvCTDonHang.Items.Clear();
+        }
+
+        #endregion
+
         #endregion
 
         #region Events
@@ -463,6 +610,9 @@ namespace eShop.GUI
                     case nameof(EAdminTab.tabLoaiNguoiDung):
                         // Mặc định
                         LamMoiLoaiNguoiDung();
+                        break;
+                    case nameof(EAdminTab.tabDonHang):
+                        LamMoiDonHang();
                         break;
                 }
             }
@@ -871,7 +1021,7 @@ namespace eShop.GUI
             {
                 MessageBox.Show("Tên loại người dùng không được để trống!",
                     "Thông báo",
-                    MessageBoxButtons.OK, 
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 tbTenLoaiND.Focus();
@@ -985,10 +1135,112 @@ namespace eShop.GUI
                 }
             }
         }
-        #endregion
 
         #endregion
 
+        #region Tab Đơn hàng
+
+        private void btnXoaDH_Click(object sender, EventArgs e)
+        {
+            rbNgayDat.Checked = false;
+            rbNgayGiao.Checked = false;
+            dtNgayBatDau.Value = DateTime.Now;
+            dtNgayKetThuc.Value = DateTime.Now;
+
+            HienThiDsDonHang();
+        }
+
+        private void rbNgayDat_CheckedChanged(object sender, EventArgs e)
+        {
+            ThayDoiNgayLocTrongFormDonHang();
+        }
+
+        private void dtNgayBatDau_ValueChanged(object sender, EventArgs e)
+        {
+            ThayDoiNgayLocTrongFormDonHang();
+        }
+
+        private void dtNgayKetThuc_ValueChanged(object sender, EventArgs e)
+        {
+            ThayDoiNgayLocTrongFormDonHang();
+        }
+
+        private void rbNgayGiao_CheckedChanged(object sender, EventArgs e)
+        {
+            ThayDoiNgayLocTrongFormDonHang();
+        }
+
+        private void tbTraCuuNhanh_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            {
+                ThayDoiNgayLocTrongFormDonHang();
+
+            }
+        }
+
+
+        private void lvDonHang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvDonHang.SelectedItems.Count > 0)
+            {
+                // Lấy ra dòng dữ liệu được chọn
+                ListViewItem selectedItem = lvDonHang.SelectedItems[0];
+                if (selectedItem != null)
+                {
+                    _ = int.TryParse(selectedItem.SubItems[(int)ETableDonHang.colMaDH].Text, out int maDH);
+                    // Hiển thị CT đơn hàng
+                    LayDsCTDonHang(maDH);
+                    tb_MaDH.Text = selectedItem.SubItems[(int)ETableDonHang.colMaDH].Text;
+                    tb_NgayDat.Text = selectedItem.SubItems[(int)ETableDonHang.colNgayDat].Text;
+                    tb_NguoiDat.Text = selectedItem.SubItems[(int)ETableDonHang.colNguoiDat].Text;
+                    tb_NgayGiao.Text = selectedItem.SubItems[(int)ETableDonHang.colNgayGiao].Text;
+                    tb_NguoiNhan.Text = selectedItem.SubItems[(int)ETableDonHang.colNguoiNhan].Text;
+                    tb_SdtNhan.Text = selectedItem.SubItems[(int)ETableDonHang.colSdtNhan].Text;
+                    tb_DiaChiNhan.Text = selectedItem.SubItems[(int)ETableDonHang.colDiaChiNhan].Text;
+                    cb_TrangThai.SelectedValue = int.Parse(selectedItem.SubItems[(int)ETableDonHang.colMaTrangThai].Text);
+                    tb_PTTT.Text = "Thanh toán khi nhận hàng";
+                    btn_ChuyenTrangThai.Enabled = true;
+                    btn_LamMoiDH.Enabled = true;
+                }
+            }
+        }
+
+        private void btn_LamMoiDH_Click(object sender, EventArgs e)
+        {
+            LamMoiDonHang();
+        }
+
+        private void btn_ChuyenTrangThai_Click(object sender, EventArgs e)
+        {
+            _ = int.TryParse(tb_MaDH.Text, out int maDonHang);
+            if (maDonHang == 0)
+            {
+                MessageBox.Show($"Bạn chưa chọn đơn hàng!",
+                    "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                if (cb_TrangThai.SelectedValue != null)
+                {
+                    _ = int.TryParse(cb_TrangThai.SelectedValue.ToString(), out int maTrangThai);
+
+                    DonHangDAO.Instance.ChuyenTrangThaiDonHang(maDonHang, maTrangThai);
+
+                    MessageBox.Show($"Cập nhật trạng thái đơn hàng thành công!",
+                        "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LamMoiDonHang();
+                }
+
+            }
+        }
+        #endregion
+
+        #endregion
 
     }
 }
