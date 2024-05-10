@@ -31,9 +31,9 @@
             menuStrip1 = new MenuStrip();
             menuDanhMuc = new ToolStripMenuItem();
             menuDonHang = new ToolStripMenuItem();
-            menuAdmin = new ToolStripMenuItem();
             menuTaiKhoan = new ToolStripMenuItem();
             menuDangXuat = new ToolStripMenuItem();
+            menuAdmin = new ToolStripMenuItem();
             panel2 = new Panel();
             btnXoaTatCa = new Button();
             btnXoaMucDaChon = new Button();
@@ -68,7 +68,7 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { menuDanhMuc, menuDonHang, menuAdmin, menuTaiKhoan });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { menuDanhMuc, menuDonHang, menuTaiKhoan, menuAdmin });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(937, 24);
@@ -89,13 +89,6 @@
             menuDonHang.Text = "Đơn hàng của bạn";
             menuDonHang.Click += menuDonHang_Click;
             // 
-            // menuAdmin
-            // 
-            menuAdmin.Name = "menuAdmin";
-            menuAdmin.Size = new Size(60, 20);
-            menuAdmin.Text = "Quản lý";
-            menuAdmin.Click += menuAdmin_Click;
-            // 
             // menuTaiKhoan
             // 
             menuTaiKhoan.DropDownItems.AddRange(new ToolStripItem[] { menuDangXuat });
@@ -109,6 +102,13 @@
             menuDangXuat.Size = new Size(128, 22);
             menuDangXuat.Text = "Đăng xuất";
             menuDangXuat.Click += menuDangXuat_Click;
+            // 
+            // menuAdmin
+            // 
+            menuAdmin.Name = "menuAdmin";
+            menuAdmin.Size = new Size(55, 20);
+            menuAdmin.Text = "Admin";
+            menuAdmin.Click += menuAdmin_Click;
             // 
             // panel2
             // 

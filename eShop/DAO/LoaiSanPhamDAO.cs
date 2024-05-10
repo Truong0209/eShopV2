@@ -1,4 +1,5 @@
-﻿using eShop.Data;
+﻿using eShop.Common.CustomUI;
+using eShop.Data;
 using eShop.Models;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,7 +8,7 @@ namespace eShop.DAO;
 
 public class LoaiSanPhamDAO
 {
-    private static LoaiSanPhamDAO? _instance;
+    private static LoaiSanPhamDAO _instance;
 
     public static LoaiSanPhamDAO Instance
     {
@@ -24,19 +25,13 @@ public class LoaiSanPhamDAO
     /// Lấy danh sách loại sản phẩm
     /// </summary>
     /// <returns>Danh sách loại sản phẩm</returns>
-    public List<LoaiSanPhamModel> LayDsLoaiSanPham(string? timKiem = null)
+    public List<LoaiSanPhamModel> LayDsLoaiSanPham()
     {
         const string tenProc = "sp_LayDsLoaiSanPham";
-        const string paramTimKiem = "@TimKiem";
-
-        SqlParameter[] parameters =
-        [
-            new(paramTimKiem, timKiem)
-        ];
 
         var danhSachLoaiSanPham = new List<LoaiSanPhamModel>();
 
-        var data = DataProvider.Instance.ExecuteStoredProcedure(tenProc, parameters);
+        var data = DataProvider.Instance.ExecuteStoredProcedure(tenProc);
 
         if (data is null)
         {
@@ -45,8 +40,8 @@ public class LoaiSanPhamDAO
 
         foreach (DataRow row in data.Rows)
         {
-            var loaiSanPham = new LoaiSanPhamModel(row);
-            danhSachLoaiSanPham.Add(loaiSanPham);
+            var sanPham = new LoaiSanPhamModel(row);
+            danhSachLoaiSanPham.Add(sanPham);
         }
 
         return danhSachLoaiSanPham;
@@ -69,7 +64,7 @@ public class LoaiSanPhamDAO
         return ketQua;
     }
 
-    public int XoaLoaiSanPham(int maLoaiSanPham)
+    public int XoaSanPham(int maLoaiSanPham)
     {
         const string tenProc = "sp_XoaLoaiSanPham";
         const string paramMaLoaiSanPham = "@MaLoaiSP";
