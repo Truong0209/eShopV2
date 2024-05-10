@@ -227,6 +227,39 @@
             colTenSP_CTDH = new ColumnHeader();
             colSoLuong_CTDH = new ColumnHeader();
             colThanhTien_CTDH = new ColumnHeader();
+            tabPage1 = new TabPage();
+            panel50 = new Panel();
+            tbSanPhamBanChay = new TextBox();
+            label38 = new Label();
+            panel49 = new Panel();
+            tbDoanhThuBC = new TextBox();
+            label37 = new Label();
+            panel48 = new Panel();
+            tbSoLuongDaBan = new TextBox();
+            label33 = new Label();
+            panel45 = new Panel();
+            lvBaoCaoDH = new ListView();
+            colSTT_BCDH = new ColumnHeader();
+            colMaDH_BC = new ColumnHeader();
+            colTenSP_BC = new ColumnHeader();
+            colSoLuong_BC = new ColumnHeader();
+            colThanhTien_BC = new ColumnHeader();
+            colNgayDat_BC = new ColumnHeader();
+            colPTTT_BC = new ColumnHeader();
+            colTrangThai_BC = new ColumnHeader();
+            groupBox6 = new GroupBox();
+            rbThangNay = new RadioButton();
+            rbHomNay = new RadioButton();
+            groupBox4 = new GroupBox();
+            btn_LamMoiBC = new Button();
+            btn_TraCuuBC = new Button();
+            label34 = new Label();
+            panel46 = new Panel();
+            dt_NgayKT_BC = new DateTimePicker();
+            label35 = new Label();
+            panel47 = new Panel();
+            dt_NgayBD_BC = new DateTimePicker();
+            label36 = new Label();
             tabLoaiNguoiDung.SuspendLayout();
             panel29.SuspendLayout();
             panel30.SuspendLayout();
@@ -285,6 +318,15 @@
             panel34.SuspendLayout();
             groupBox2.SuspendLayout();
             gbChiTietHH.SuspendLayout();
+            tabPage1.SuspendLayout();
+            panel50.SuspendLayout();
+            panel49.SuspendLayout();
+            panel48.SuspendLayout();
+            panel45.SuspendLayout();
+            groupBox6.SuspendLayout();
+            groupBox4.SuspendLayout();
+            panel46.SuspendLayout();
+            panel47.SuspendLayout();
             SuspendLayout();
             // 
             // tabLoaiNguoiDung
@@ -1467,6 +1509,7 @@
             tabAdmin.Controls.Add(tabNguoiDung);
             tabAdmin.Controls.Add(tabLoaiNguoiDung);
             tabAdmin.Controls.Add(tabDonHang);
+            tabAdmin.Controls.Add(tabPage1);
             tabAdmin.Dock = DockStyle.Fill;
             tabAdmin.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tabAdmin.Location = new Point(0, 0);
@@ -2112,6 +2155,307 @@
             colThanhTien_CTDH.Text = "Thành Tiền";
             colThanhTien_CTDH.Width = 110;
             // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(panel50);
+            tabPage1.Controls.Add(panel49);
+            tabPage1.Controls.Add(panel48);
+            tabPage1.Controls.Add(panel45);
+            tabPage1.Controls.Add(groupBox6);
+            tabPage1.Controls.Add(groupBox4);
+            tabPage1.Location = new Point(4, 26);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(933, 621);
+            tabPage1.TabIndex = 6;
+            tabPage1.Text = "Báo cáo đơn hàng";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // panel50
+            // 
+            panel50.Controls.Add(tbSanPhamBanChay);
+            panel50.Controls.Add(label38);
+            panel50.Location = new Point(7, 558);
+            panel50.Name = "panel50";
+            panel50.Size = new Size(440, 57);
+            panel50.TabIndex = 20;
+            // 
+            // tbSanPhamBanChay
+            // 
+            tbSanPhamBanChay.BorderStyle = BorderStyle.None;
+            tbSanPhamBanChay.Enabled = false;
+            tbSanPhamBanChay.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
+            tbSanPhamBanChay.Location = new Point(139, 18);
+            tbSanPhamBanChay.Name = "tbSanPhamBanChay";
+            tbSanPhamBanChay.Size = new Size(298, 22);
+            tbSanPhamBanChay.TabIndex = 1;
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            label38.Location = new Point(3, 18);
+            label38.Name = "label38";
+            label38.Size = new Size(132, 17);
+            label38.TabIndex = 0;
+            label38.Text = "Sản phẩm bán chạy:";
+            // 
+            // panel49
+            // 
+            panel49.Controls.Add(tbDoanhThuBC);
+            panel49.Controls.Add(label37);
+            panel49.Location = new Point(699, 558);
+            panel49.Name = "panel49";
+            panel49.Size = new Size(228, 57);
+            panel49.TabIndex = 19;
+            // 
+            // tbDoanhThuBC
+            // 
+            tbDoanhThuBC.BorderStyle = BorderStyle.None;
+            tbDoanhThuBC.Enabled = false;
+            tbDoanhThuBC.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
+            tbDoanhThuBC.Location = new Point(87, 15);
+            tbDoanhThuBC.Name = "tbDoanhThuBC";
+            tbDoanhThuBC.Size = new Size(138, 22);
+            tbDoanhThuBC.TabIndex = 3;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            label37.Location = new Point(3, 18);
+            label37.Name = "label37";
+            label37.Size = new Size(78, 17);
+            label37.TabIndex = 0;
+            label37.Text = "Doanh thu:";
+            // 
+            // panel48
+            // 
+            panel48.Controls.Add(tbSoLuongDaBan);
+            panel48.Controls.Add(label33);
+            panel48.Location = new Point(453, 558);
+            panel48.Name = "panel48";
+            panel48.Size = new Size(240, 57);
+            panel48.TabIndex = 18;
+            // 
+            // tbSoLuongDaBan
+            // 
+            tbSoLuongDaBan.BorderStyle = BorderStyle.None;
+            tbSoLuongDaBan.Enabled = false;
+            tbSoLuongDaBan.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic);
+            tbSoLuongDaBan.Location = new Point(163, 15);
+            tbSoLuongDaBan.Name = "tbSoLuongDaBan";
+            tbSoLuongDaBan.Size = new Size(69, 22);
+            tbSoLuongDaBan.TabIndex = 2;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            label33.Location = new Point(3, 18);
+            label33.Name = "label33";
+            label33.Size = new Size(154, 17);
+            label33.TabIndex = 0;
+            label33.Text = "Tổng sản phẩm đã bán:";
+            // 
+            // panel45
+            // 
+            panel45.Controls.Add(lvBaoCaoDH);
+            panel45.Location = new Point(7, 82);
+            panel45.Name = "panel45";
+            panel45.Size = new Size(918, 470);
+            panel45.TabIndex = 17;
+            // 
+            // lvBaoCaoDH
+            // 
+            lvBaoCaoDH.Columns.AddRange(new ColumnHeader[] { colSTT_BCDH, colMaDH_BC, colTenSP_BC, colSoLuong_BC, colThanhTien_BC, colNgayDat_BC, colPTTT_BC, colTrangThai_BC });
+            lvBaoCaoDH.Dock = DockStyle.Fill;
+            lvBaoCaoDH.Location = new Point(0, 0);
+            lvBaoCaoDH.Name = "lvBaoCaoDH";
+            lvBaoCaoDH.Size = new Size(918, 470);
+            lvBaoCaoDH.TabIndex = 0;
+            lvBaoCaoDH.UseCompatibleStateImageBehavior = false;
+            lvBaoCaoDH.View = View.Details;
+            // 
+            // colSTT_BCDH
+            // 
+            colSTT_BCDH.Text = "STT";
+            // 
+            // colMaDH_BC
+            // 
+            colMaDH_BC.Text = "Mã Đơn Hàng";
+            colMaDH_BC.Width = 100;
+            // 
+            // colTenSP_BC
+            // 
+            colTenSP_BC.Text = "Tên Sản Phẩm";
+            colTenSP_BC.Width = 150;
+            // 
+            // colSoLuong_BC
+            // 
+            colSoLuong_BC.Text = "Số Lượng";
+            colSoLuong_BC.Width = 80;
+            // 
+            // colThanhTien_BC
+            // 
+            colThanhTien_BC.Text = "Thành Tiền";
+            colThanhTien_BC.Width = 120;
+            // 
+            // colNgayDat_BC
+            // 
+            colNgayDat_BC.Text = "Ngày đặt";
+            colNgayDat_BC.Width = 100;
+            // 
+            // colPTTT_BC
+            // 
+            colPTTT_BC.Text = "Phương thức thanh toán";
+            colPTTT_BC.Width = 200;
+            // 
+            // colTrangThai_BC
+            // 
+            colTrangThai_BC.Text = "Trạng thái";
+            colTrangThai_BC.Width = 100;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(rbThangNay);
+            groupBox6.Controls.Add(rbHomNay);
+            groupBox6.Location = new Point(8, 6);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(260, 71);
+            groupBox6.TabIndex = 16;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Chọn nhanh";
+            // 
+            // rbThangNay
+            // 
+            rbThangNay.AutoSize = true;
+            rbThangNay.Location = new Point(96, 30);
+            rbThangNay.Name = "rbThangNay";
+            rbThangNay.Size = new Size(86, 21);
+            rbThangNay.TabIndex = 1;
+            rbThangNay.TabStop = true;
+            rbThangNay.Text = "Tháng này";
+            rbThangNay.UseVisualStyleBackColor = true;
+            rbThangNay.CheckedChanged += rbThangNay_CheckedChanged;
+            // 
+            // rbHomNay
+            // 
+            rbHomNay.AutoSize = true;
+            rbHomNay.Location = new Point(12, 30);
+            rbHomNay.Name = "rbHomNay";
+            rbHomNay.Size = new Size(78, 21);
+            rbHomNay.TabIndex = 0;
+            rbHomNay.TabStop = true;
+            rbHomNay.Text = "Hôm nay";
+            rbHomNay.UseVisualStyleBackColor = true;
+            rbHomNay.CheckedChanged += rbHomNay_CheckedChanged;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(btn_LamMoiBC);
+            groupBox4.Controls.Add(btn_TraCuuBC);
+            groupBox4.Controls.Add(label34);
+            groupBox4.Controls.Add(panel46);
+            groupBox4.Controls.Add(panel47);
+            groupBox4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            groupBox4.Location = new Point(274, 6);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(651, 71);
+            groupBox4.TabIndex = 15;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Bộ lọc";
+            // 
+            // btn_LamMoiBC
+            // 
+            btn_LamMoiBC.Location = new Point(546, 30);
+            btn_LamMoiBC.Name = "btn_LamMoiBC";
+            btn_LamMoiBC.Size = new Size(100, 35);
+            btn_LamMoiBC.TabIndex = 5;
+            btn_LamMoiBC.Text = "Làm mới";
+            btn_LamMoiBC.UseVisualStyleBackColor = true;
+            btn_LamMoiBC.Click += btn_LamMoiBC_Click;
+            // 
+            // btn_TraCuuBC
+            // 
+            btn_TraCuuBC.Location = new Point(444, 30);
+            btn_TraCuuBC.Name = "btn_TraCuuBC";
+            btn_TraCuuBC.Size = new Size(100, 35);
+            btn_TraCuuBC.TabIndex = 4;
+            btn_TraCuuBC.Text = "Tra Cứu";
+            btn_TraCuuBC.UseVisualStyleBackColor = true;
+            btn_TraCuuBC.Click += btn_TraCuuBC_Click;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label34.Location = new Point(207, 42);
+            label34.Name = "label34";
+            label34.Size = new Size(28, 21);
+            label34.TabIndex = 3;
+            label34.Text = "->";
+            // 
+            // panel46
+            // 
+            panel46.Controls.Add(dt_NgayKT_BC);
+            panel46.Controls.Add(label35);
+            panel46.Location = new Point(238, 21);
+            panel46.Name = "panel46";
+            panel46.Size = new Size(200, 44);
+            panel46.TabIndex = 2;
+            // 
+            // dt_NgayKT_BC
+            // 
+            dt_NgayKT_BC.Dock = DockStyle.Bottom;
+            dt_NgayKT_BC.Format = DateTimePickerFormat.Short;
+            dt_NgayKT_BC.Location = new Point(0, 19);
+            dt_NgayKT_BC.MinDate = new DateTime(2022, 1, 1, 0, 0, 0, 0);
+            dt_NgayKT_BC.Name = "dt_NgayKT_BC";
+            dt_NgayKT_BC.Size = new Size(200, 25);
+            dt_NgayKT_BC.TabIndex = 3;
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Dock = DockStyle.Top;
+            label35.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label35.Location = new Point(0, 0);
+            label35.Name = "label35";
+            label35.Size = new Size(93, 17);
+            label35.TabIndex = 1;
+            label35.Text = "Ngày kết thúc";
+            // 
+            // panel47
+            // 
+            panel47.Controls.Add(dt_NgayBD_BC);
+            panel47.Controls.Add(label36);
+            panel47.Location = new Point(6, 21);
+            panel47.Name = "panel47";
+            panel47.Size = new Size(200, 44);
+            panel47.TabIndex = 1;
+            // 
+            // dt_NgayBD_BC
+            // 
+            dt_NgayBD_BC.Dock = DockStyle.Bottom;
+            dt_NgayBD_BC.Format = DateTimePickerFormat.Short;
+            dt_NgayBD_BC.Location = new Point(0, 19);
+            dt_NgayBD_BC.MinDate = new DateTime(2022, 1, 1, 0, 0, 0, 0);
+            dt_NgayBD_BC.Name = "dt_NgayBD_BC";
+            dt_NgayBD_BC.Size = new Size(200, 25);
+            dt_NgayBD_BC.TabIndex = 2;
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Dock = DockStyle.Top;
+            label36.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label36.Location = new Point(0, 0);
+            label36.Name = "label36";
+            label36.Size = new Size(88, 17);
+            label36.TabIndex = 1;
+            label36.Text = "Ngày bắt đầu";
+            // 
             // fAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -2219,6 +2563,22 @@
             panel34.PerformLayout();
             groupBox2.ResumeLayout(false);
             gbChiTietHH.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            panel50.ResumeLayout(false);
+            panel50.PerformLayout();
+            panel49.ResumeLayout(false);
+            panel49.PerformLayout();
+            panel48.ResumeLayout(false);
+            panel48.PerformLayout();
+            panel45.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            panel46.ResumeLayout(false);
+            panel46.PerformLayout();
+            panel47.ResumeLayout(false);
+            panel47.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -2423,5 +2783,38 @@
         private ColumnHeader colMaTT;
         private ColumnHeader colPTTT;
         private Label lb_TongTien;
+        private TabPage tabPage1;
+        private GroupBox groupBox4;
+        private Label label34;
+        private Panel panel46;
+        private DateTimePicker dt_NgayKT_BC;
+        private Label label35;
+        private Panel panel47;
+        private DateTimePicker dt_NgayBD_BC;
+        private Label label36;
+        private GroupBox groupBox6;
+        private Panel panel45;
+        private Panel panel48;
+        private Panel panel49;
+        private Label label37;
+        private Label label33;
+        private ListView lvBaoCaoDH;
+        private ColumnHeader colSTT_BCDH;
+        private ColumnHeader colMaDH_BC;
+        private ColumnHeader colTenSP_BC;
+        private ColumnHeader colSoLuong_BC;
+        private ColumnHeader colThanhTien_BC;
+        private ColumnHeader colNgayDat_BC;
+        private ColumnHeader colPTTT_BC;
+        private ColumnHeader colTrangThai_BC;
+        private Panel panel50;
+        private Label label38;
+        private TextBox tbSanPhamBanChay;
+        private TextBox tbDoanhThuBC;
+        private TextBox tbSoLuongDaBan;
+        private Button btn_TraCuuBC;
+        private RadioButton rbThangNay;
+        private RadioButton rbHomNay;
+        private Button btn_LamMoiBC;
     }
 }

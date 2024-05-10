@@ -357,6 +357,7 @@ namespace eShop.GUI
         }
         #endregion
 
+
         #region Tab Đơn hàng
 
         /// <summary>
@@ -503,6 +504,60 @@ namespace eShop.GUI
             lvCTDonHang.Items.Clear();
         }
 
+        #endregion
+
+
+        #region Tab Báo cáo đơn hàng
+
+        public void LamMoiBaoCao()
+        {
+            rbThangNay.Checked = false;
+            rbHomNay.Checked = false;
+
+            dt_NgayBD_BC.Value = DateTime.Now;
+            dt_NgayKT_BC.Value = DateTime.Now;
+
+            lvBaoCaoDH.Items.Clear();
+            tbSanPhamBanChay.Text = null;
+            tbSoLuongDaBan.Text = null;
+            tbDoanhThuBC.Text = null;
+        }
+
+        public void HienThiBaoCao(DateTime ngayBatDau, DateTime ngayKetThuc)
+        {
+            List<BaoCaoDhModel> duLieuBaoCao = BaoCaoDhDAO.Instance.LayBaoCaoDonHang(ngayBatDau, ngayKetThuc);
+            lvBaoCaoDH.Items.Clear();
+
+            if (duLieuBaoCao.Count > 0)
+            {
+                int soTT = 1;
+                foreach (var duLieu in duLieuBaoCao)
+                {
+                    ListViewItem lsvItem = new(soTT.ToString());
+                    lsvItem.SubItems.Add(duLieu.MaDonHang.ToString());
+                    lsvItem.SubItems.Add(duLieu.TenSP);
+                    lsvItem.SubItems.Add(duLieu.SoLuong.ToString());
+                    lsvItem.SubItems.Add(string.Format("{0:N0}", duLieu.ThanhTien));
+                    lsvItem.SubItems.Add(duLieu.NgayDat.ToString("dd/MM/yyyy"));
+                    lsvItem.SubItems.Add(duLieu.PhuongThucTT);
+                    lsvItem.SubItems.Add(duLieu.TrangThai);
+                    lvBaoCaoDH.Items.Add(lsvItem);
+                    soTT++;
+                }
+                tbSoLuongDaBan.Text = duLieuBaoCao.Sum(item => item.SoLuong).ToString();
+                tbDoanhThuBC.Text = string.Format("{0:N0} VND", duLieuBaoCao.Sum(item => item.ThanhTien));
+                var nhomDuLieuTheoTen = duLieuBaoCao
+                    .GroupBy(c => c.TenSP)
+                    .Select(g => new { SanPham = g.Key, SoLuong = g.Sum(c => c.SoLuong) });
+                var soLuongLonNhat = nhomDuLieuTheoTen.Max(c => c.SoLuong);
+                var dsSanPhamBanChay = nhomDuLieuTheoTen
+                    .OrderByDescending(c => c.SoLuong)
+                    .Where(c => c.SoLuong == soLuongLonNhat)
+                    .Select(c => c.SanPham);
+
+                tbSanPhamBanChay.Text = string.Join(", ", dsSanPhamBanChay);
+            }
+        }
         #endregion
 
         #endregion
@@ -1237,6 +1292,54 @@ namespace eShop.GUI
                 }
 
             }
+        }
+        #endregion
+
+        #region Tab Báo cáo đơn hàng
+        private void rbHomNay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbHomNay.Checked == true)
+            {
+                DateTime ngayHienTai = DateTime.Now.Date;
+                dt_NgayBD_BC.Value = ngayHienTai;
+                dt_NgayKT_BC.Value = ngayHienTai;
+                HienThiBaoCao(ngayHienTai, ngayHienTai);
+            }
+        }
+
+        private void rbThangNay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbThangNay.Checked == true)
+            {
+                DateTime ngayHienTai = DateTime.Now.Date;
+                DateTime ngayDauThang = new(ngayHienTai.Year, ngayHienTai.Month, 1);
+                dt_NgayBD_BC.Value = ngayDauThang;
+                dt_NgayKT_BC.Value = ngayHienTai;
+                HienThiBaoCao(ngayDauThang, ngayHienTai);
+            }
+        }
+
+        private void btn_TraCuuBC_Click(object sender, EventArgs e)
+        {
+            // Lọc theo ngày
+            rbThangNay.Checked = false;
+            rbHomNay.Checked = false;
+
+            if (dt_NgayKT_BC.Value.Date < dt_NgayBD_BC.Value.Date)
+            {
+                dt_NgayKT_BC.Focus();
+                MessageBox.Show("Ngày kết thúc không được nhỏ nhơn ngày bắt đầu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                HienThiBaoCao(dt_NgayBD_BC.Value.Date, dt_NgayKT_BC.Value.Date);
+            }
+        }
+
+        private void btn_LamMoiBC_Click(object sender, EventArgs e)
+        {
+            LamMoiBaoCao();
         }
         #endregion
 
