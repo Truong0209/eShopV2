@@ -14,32 +14,56 @@ public class Enums
         tabSanPham,
         tabLoaiSanPham,
         tabNguoiDung,
+        tabLoaiNguoiDung,
         tabDonHang
     }
 
     public enum ETableSanPham
     {
-        colTenSP = 0,
-        colGiaSP = 1,
-        colSoLuong = 2,
-        colHienThi = 3,
-        colLoaiSP = 4,
-        colAnhSP = 5,
-        colMaLoaiSP = 6,
-        colMaSP = 7,
+        colSTT = 0,
+        colTenSP = 1,
+        colGiaSP = 2,
+        colSoLuong = 3,
+        colHienThi = 4,
+        colLoaiSP = 5,
+        colAnhSP = 6,
+        colMaLoaiSP = 7,
+        colMaSP = 8,
+    }
+
+    public enum ETableNguoiDung
+    {
+        colSTT = 0,
+        colMaTaiKhoan = 1,
+        colTenNguoiDung = 2,
+        colTenDangNhap = 3,
+        colMatKhau = 4,
+        colEmail = 5,
+        colNgayTao = 6,
+        colLanDangNhapCuoi = 7,
+        colMaLoaiTaiKhoan = 8,
+        colTenLoaiTaiKhoan = 9,
+        colTrangThai = 10
     }
 
     public enum ETableLoaiSanPham
     {
-        colMaLoaiSP = 0,
-        colTenLoaiSP = 1     
+        colMaLoaiSP = 1,
+        colTenLoaiSP = 2     
+    }
+
+    public enum ETableLoaiNguoiDung
+    {
+        colMaLoaiND = 1,
+        colTenLoaiND = 2
     }
 
     public enum EKetQuaTruyVan
     {
         KhongTonTai = 404, // Không tồn tại
         ThanhCong = 1, // Thành công
-        ThatBai = 0 // Thât bại
+        ThatBai = 0, // Thât bại
+        DangSuDung = -1
     }
 
     public enum ELoaiXuLy
