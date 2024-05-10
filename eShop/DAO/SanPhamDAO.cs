@@ -3,8 +3,6 @@ using eShop.Models;
 using System.Data.SqlClient;
 using System.Data;
 using eShop.Chung;
-using eShop.Common.CustomUI;
-using System.Formats.Tar;
 
 namespace eShop.DAO;
 
