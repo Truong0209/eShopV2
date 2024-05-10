@@ -58,6 +58,10 @@ namespace eShop.From
             {
                 e.Cancel = true;
             }
+            else
+            {
+                Application.ExitThread();
+            }
         }
         #endregion
     }
